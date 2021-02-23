@@ -5,6 +5,8 @@ import { CHATROOM } from './../data/dummy-data';
 
 const Chat = props => {
     console.log(CHATROOM);
+    
+
    return (
       <View style={styles.container}>
           <FlatList
