@@ -4,7 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -14,6 +14,9 @@ import Discover from './screens/Discover';
 import Chat from './screens/Chat';
 import ChatMessages from './screens/ChatMessages';
 import Menu from './screens/Menu';
+
+
+DefaultTheme.colors.background = '#FFFFFF'; // set background color globally
 
 
 const Tab = createBottomTabNavigator();
@@ -72,10 +75,5 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+  
 });
