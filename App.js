@@ -14,6 +14,10 @@ import Discover from './screens/Discover';
 import Chat from './screens/Chat';
 import ChatMessages from './screens/ChatMessages';
 import Menu from './screens/Menu';
+import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
+import ChatReducer from './store/reducers/ChatReducer';
+
 
 
 DefaultTheme.colors.background = '#FFFFFF'; // set background color globally
@@ -33,44 +37,50 @@ function StackNavigator() {
   );
 }
 
+const rootReducer = combineReducers({
+  chat: ChatReducer
+});
+const store = createStore(rootReducer);
 
 export default function App() {
 
 
   return (
-    <NavigationContainer>
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
+    <Provider store={store}>
+      <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ focused, color, size }) => {
+            let iconName;
 
-          if (route.name === 'Home') {
-            iconName = focused
-              ? 'ios-information-circle'
-              : 'ios-information-circle-outline';
-          } else if (route.name === 'Discover') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
-          } else if (route.name === 'Chat') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
-          } else if (route.name === 'Menu') {
-            iconName = focused ? 'ios-list-box' : 'ios-list';
-          }
+            if (route.name === 'Home') {
+              iconName = focused
+                ? 'ios-information-circle'
+                : 'ios-information-circle-outline';
+            } else if (route.name === 'Discover') {
+              iconName = focused ? 'ios-list-box' : 'ios-list';
+            } else if (route.name === 'Chat') {
+              iconName = focused ? 'ios-list-box' : 'ios-list';
+            } else if (route.name === 'Menu') {
+              iconName = focused ? 'ios-list-box' : 'ios-list';
+            }
 
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-      })}
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}
-    >
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Discover" component={Discover} />
-      <Tab.Screen name="Chat" component={StackNavigator} />
-      <Tab.Screen name="Menu" component={Menu} />
-    </Tab.Navigator>
-  </NavigationContainer>
+            // You can return any component that you like here!
+            return <Ionicons name={iconName} size={size} color={color} />;
+          },
+        })}
+        tabBarOptions={{
+          activeTintColor: 'tomato',
+          inactiveTintColor: 'gray',
+        }}
+      >
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Discover" component={Discover} />
+        <Tab.Screen name="Chat" component={StackNavigator} />
+        <Tab.Screen name="Menu" component={Menu} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  </Provider>
   );
 }
 
