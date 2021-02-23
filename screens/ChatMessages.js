@@ -19,7 +19,7 @@ const ChatMessages = props => {
             
             <View style={styles.messages}>
                 <FlatList data={chatMessages} renderItem={itemData => (
-                    <ChatMessage chatmessage={itemData.item}></ChatMessage> 
+                    <ChatMessage chatmessage={itemData.item} img={require('./../assets/ac99082f65d5c636e14e70785817899e.png')}></ChatMessage> 
                 )}></FlatList>
             </View>
             

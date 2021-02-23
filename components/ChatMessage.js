@@ -21,13 +21,13 @@ const ChatMessage = props => {
     if (!isMe){
         name = 'From ' + props.chatmessage.user.name;
     }
-
+    console.log("----------------: " + props.img);
     // only display the image if this message is not written by me.
     let image;
     if (!isMe) {
         image = <Image
             style={styles.tinyLogo}
-            source={require('./../assets/ac99082f65d5c636e14e70785817899e.png')}/>
+            source={ props.img } />
     }    
 
     return (
