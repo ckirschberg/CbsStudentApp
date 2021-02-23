@@ -12,6 +12,7 @@ const ChatMessages = props => {
 
     const chatMessages = CHATROOM.find(room => room.id === id).chatMessages;
 
+    
 
     return (
         <View style={styles.container}>
@@ -31,6 +32,8 @@ const ChatMessages = props => {
                     style={styles.textInput}
                     onChangeText={text => onChangeText(text)}
                     value={value}/>
+
+                <Button title="Send"></Button>
             </View>
 
         </View>
