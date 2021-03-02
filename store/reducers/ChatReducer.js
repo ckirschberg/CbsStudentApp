@@ -15,11 +15,12 @@ const ChatReducer = (state = initialState, action) => {
         // 1: find the right chatroom in the array and copy the chatmessages array.
         case NEW_CHATMESSAGE:
             const chatroom = state.chatrooms.find(room => room.id === action.payload.chatroomId);
-            const chatmessages = [...state.chatrooms, action.payload.message];
+            const chatmessages = [...chatroom.chatMessages, action.payload.message];
 
 
             // 2: Copy chatroom object and attach new chat array that you copied.
-            
+
+            //3: Insert the new chatroom
 
             return state;
 
