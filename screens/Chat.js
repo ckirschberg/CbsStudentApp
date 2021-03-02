@@ -1,15 +1,17 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, FlatList } from 'react-native';
 import ChatRoom from './../components/ChatRoom';
-import { CHATROOM } from './../data/dummy-data';
+// import { CHATROOM } from './../data/dummy-data';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleHappy } from './../store/ChatActions';
 
 const Chat = props => {
     const dispatch = useDispatch();
-    console.log(CHATROOM);
     const happy = useSelector(state => state.chat.happy);    
     console.log("Are you happy? " + happy);
+
+    const chatrooms = useSelector(state => state.chat.chatrooms); // selecting from redux store
+
 
     const onHappyHandler = () => {
         dispatch(toggleHappy());
@@ -19,7 +21,7 @@ const Chat = props => {
       <View style={styles.container}>
         
           <FlatList
-            data={CHATROOM}
+            data={chatrooms}
             renderItem={itemData => (
                 <ChatRoom chatroom={itemData.item}></ChatRoom>
             )}

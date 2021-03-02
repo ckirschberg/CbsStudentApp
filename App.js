@@ -14,7 +14,8 @@ import Discover from './screens/Discover';
 import Chat from './screens/Chat';
 import ChatMessages from './screens/ChatMessages';
 import Menu from './screens/Menu';
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import ChatReducer from './store/reducers/ChatReducer';
 
@@ -40,7 +41,7 @@ function StackNavigator() {
 const rootReducer = combineReducers({
   chat: ChatReducer
 });
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, composeWithDevTools());
 
 export default function App() {
 

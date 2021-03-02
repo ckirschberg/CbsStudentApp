@@ -1,18 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet, FlatList, TextInput, Image } from 'react-native';
 import ChatRoom from '../components/ChatRoom';
 import { CHATROOM } from './../data/dummy-data';
 import ChatMessage from './../components/ChatMessage'
-
+import { useSelector, useDispatch } from 'react-redux';
+import { addToTest } from './../store/ChatActions';
 
 const ChatMessages = props => {
+    const dispatch = useDispatch();
     const { id } = props.route.params;
     console.log(id);
-    const [value, onChangeText] = React.useState('Write message');
+    const [value, onChangeText] = useState('Write message');
 
     const chatMessages = CHATROOM.find(room => room.id === id).chatMessages;
 
+
+    const test = useSelector(state => state.chat.test);
+    console.log("test");
+    console.log(test);
     
+    const handleSend = () => {
+        console.log("value " + value);
+        dispatch(addToTest(value));
+    };
 
     return (
         <View style={styles.container}>
@@ -33,7 +43,7 @@ const ChatMessages = props => {
                     onChangeText={text => onChangeText(text)}
                     value={value}/>
 
-                <Button title="Send"></Button>
+                <Button title="Send" onPress={handleSend}></Button>
             </View>
 
         </View>
