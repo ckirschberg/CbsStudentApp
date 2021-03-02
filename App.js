@@ -42,6 +42,7 @@ const rootReducer = combineReducers({
   chat: ChatReducer
 });
 const store = createStore(rootReducer, composeWithDevTools());
+// const store = createStore(rootReducer);
 
 export default function App() {
 

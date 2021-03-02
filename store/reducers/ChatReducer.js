@@ -17,23 +17,23 @@ const ChatReducer = (state = initialState, action) => {
             const chatroom = state.chatrooms.find(room => room.id === action.payload.chatroomId);
             const chatmessages = [...chatroom.chatMessages, action.payload.message];
 
-
+            
             // 2: Copy chatroom object and attach new chat array that you copied.
             const newChatRoom = { ...chatroom };
             newChatRoom.chatMessages = chatmessages;
 
-
             //3: Insert the new chatroom object into the array of chatrooms
             // Hint: use js-array's findIndex function, to find the index in the array of the object we want.
             // js Splice method to create a new array and insert the created chatroom object.
+            
+            const index = state.chatrooms.findIndex(room => room.id === action.payload.chatroomId);
+            const chatroomArray = [...state.chatrooms];
+            chatroomArray.splice(index, 1, newChatRoom);
 
-            return state;
-
-
-
-
-        
-
+            return {
+                ...state,
+                chatrooms: chatroomArray
+            };
 
         case ADD_TO_TEST: 
             console.log("reducer "+ action.payload);
