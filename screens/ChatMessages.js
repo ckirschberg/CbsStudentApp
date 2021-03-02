@@ -12,7 +12,8 @@ const ChatMessages = props => {
     console.log(id);
     const [value, onChangeText] = useState('Write message');
 
-    const chatMessages = CHATROOM.find(room => room.id === id).chatMessages;
+
+    const chatMessages = useSelector(state => state.chat.chatrooms).find(room => room.id === id).chatMessages;
 
 
     const test = useSelector(state => state.chat.test);
