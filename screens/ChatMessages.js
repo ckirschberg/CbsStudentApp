@@ -1,18 +1,38 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet, FlatList, TextInput, Image } from 'react-native';
 import ChatRoom from '../components/ChatRoom';
-import { CHATROOM } from './../data/dummy-data';
-import ChatMessage from './../components/ChatMessage'
-
+// import { CHATROOM } from './../data/dummy-data';
+import ChatMessage from './../components/ChatMessage';
+import ChatMessageModel from './../models/ChatMessage';
+import { useSelector, useDispatch } from 'react-redux';
+import { deleteMessage, newMessage } from './../store/ChatActions';
+import User from '../models/User';
 
 const ChatMessages = props => {
     const { id } = props.route.params;
-    console.log(id);
+    const dispatch = useDispatch();
+    // console.log(id);
     const [value, onChangeText] = React.useState('Write message');
-
-    const chatMessages = CHATROOM.find(room => room.id === id).chatMessages;
-
     
+    // Hardcoded logged in user
+    const loggedInUser = 
+        new User('1','Felix Sandgren', '1234', 'felix@sandgren.dk', '', 'MSc in Medicine', true);
+    
+
+    const chatMessages = useSelector(state => state.chat.chatrooms)
+        .find(room => room.id === id).chatMessages;
+
+
+    const onSendMessageHandler = () => {
+        console.log("hello");
+        // const chatMessage = new ChatMessageModel(Math.random().toString(), new Date(), value, loggedInUser);
+        const chatMessage = new ChatMessageModel('7', new Date(), value, loggedInUser);
+        dispatch(newMessage(id, chatMessage));
+    };
+    const onDeleteMessageHandler = () => {
+        console.log("delete");
+        dispatch(deleteMessage(id, '7'));
+    }
 
     return (
         <View style={styles.container}>
@@ -33,7 +53,8 @@ const ChatMessages = props => {
                     onChangeText={text => onChangeText(text)}
                     value={value}/>
 
-                <Button title="Send"></Button>
+                <Button title="Send" onPress={onSendMessageHandler}></Button>
+                <Button title="Delete" onPress={onDeleteMessageHandler}></Button>
             </View>
 
         </View>
