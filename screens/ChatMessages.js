@@ -4,7 +4,7 @@ import ChatRoom from '../components/ChatRoom';
 import { CHATROOM } from './../data/dummy-data';
 import ChatMessage from './../components/ChatMessage'
 import { useSelector, useDispatch } from 'react-redux';
-import { addToTest } from './../store/ChatActions';
+import { addToTest, addToChats } from './../store/ChatActions';
 
 const ChatMessages = props => {
     const dispatch = useDispatch();
@@ -21,7 +21,7 @@ const ChatMessages = props => {
     
     const handleSend = () => {
         console.log("value " + value);
-        dispatch(addToTest(value));
+        dispatch(addToChats(value, id));
     };
 
     return (
