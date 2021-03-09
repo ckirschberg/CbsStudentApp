@@ -1,4 +1,4 @@
-import { ADD_TO_TEST, TOGGLE_HAPPY, NEW_CHATMESSAGE, DELETE_MESSAGE } from './../ChatActions';
+import { ADD_TO_TEST, TOGGLE_HAPPY, NEW_CHATMESSAGE } from './../ChatActions';
 // import from dummy data to access chat
 import { CHATROOM } from './../../data/dummy-data';
 
@@ -11,21 +11,6 @@ const initialState = {
 
 const ChatReducer = (state = initialState, action) => {
     switch (action.type) {
-        case DELETE_MESSAGE:
-            const deleteChatArray = state.chatrooms.find(room => room.id === action.payload.roomId).chatMessages
-                .filter(message => message.id !== action.payload.messageId);
-            
-            const deleteChatRoom = {...state.chatrooms.find(room => room.id === action.payload.roomId)};
-            deleteChatRoom.chatMessages = deleteChatArray;
-
-            const chatroomIndexDelete = state.chatrooms.findIndex(room => room.id === action.payload.roomId);
-            const deleteRoomArray = [...state.chatrooms];
-            deleteRoomArray.splice(chatroomIndexDelete, 1, deleteChatRoom);
-
-            return {
-                ...state,
-                chatrooms: deleteRoomArray
-            };
         
         // Call a new action creator, that you create, when clicking the button. Pass relevant info. in payload.
         // 1: find the right chatroom in the array and copy the chatmessages array.

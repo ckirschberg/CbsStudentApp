@@ -1,9 +1,11 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const Menu = props => {
+const Notifications = props => {
    return (
-      <Text>Menu</Text>
+      <View>
+          <Text>Notifications</Text>
+      </View>
    );
 }
 
@@ -11,4 +13,4 @@ const styles = StyleSheet.create({
    
 });
 
-export default Menu;
+export default Notifications;

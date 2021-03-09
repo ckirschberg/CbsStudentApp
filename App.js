@@ -13,11 +13,12 @@ import Home from './screens/Home';
 import Discover from './screens/Discover';
 import Chat from './screens/Chat';
 import ChatMessages from './screens/ChatMessages';
-import Menu from './screens/Menu';
+import MenuScreen from './screens/MenuScreen';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import ChatReducer from './store/reducers/ChatReducer';
+import EditProfileScreen from './screens/EditProfileScreen';
 
 
 
@@ -34,6 +35,17 @@ function StackNavigator() {
           title: 'CHAT', 
         }}/>
         <Stack.Screen name="ChatMessages" component={ChatMessages} />
+      </Stack.Navigator>
+  );
+}
+
+function MenuStackNavigator() {
+  return (
+      <Stack.Navigator>
+        <Stack.Screen name="Menu" component={MenuScreen} options={{
+          title: 'Menu', 
+        }}/>
+        <Stack.Screen name="EditProfile" component={EditProfileScreen} />
       </Stack.Navigator>
   );
 }
@@ -79,7 +91,7 @@ export default function App() {
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Discover" component={Discover} />
         <Tab.Screen name="Chat" component={StackNavigator} />
-        <Tab.Screen name="Menu" component={Menu} />
+        <Tab.Screen name="Menu" component={MenuStackNavigator} />
       </Tab.Navigator>
     </NavigationContainer>
   </Provider>
