@@ -1,4 +1,4 @@
-import { ADD_TO_TEST, TOGGLE_HAPPY, NEW_CHATMESSAGE } from './../ChatActions';
+import { ADD_TO_TEST, TOGGLE_HAPPY, NEW_CHATMESSAGE, DELETE_MESSAGE } from './../ChatActions';
 // import from dummy data to access chat
 import { CHATROOM } from './../../data/dummy-data';
 
