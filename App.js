@@ -19,6 +19,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { Provider } from 'react-redux';
 import ChatReducer from './store/reducers/ChatReducer';
 import EditProfileScreen from './screens/EditProfileScreen';
+import UserReducer from './store/reducers/UserReducer';
 
 
 
@@ -51,7 +52,8 @@ function MenuStackNavigator() {
 }
 
 const rootReducer = combineReducers({
-  chat: ChatReducer
+  chat: ChatReducer,
+  user: UserReducer
 });
 const store = createStore(rootReducer, composeWithDevTools());
 // const store = createStore(rootReducer);
