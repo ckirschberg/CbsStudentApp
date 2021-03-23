@@ -20,7 +20,8 @@ import { Provider } from 'react-redux';
 import ChatReducer from './store/reducers/ChatReducer';
 import EditProfileScreen from './screens/EditProfileScreen';
 import UserReducer from './store/reducers/UserReducer';
-
+import ReduxThunk from 'redux-thunk';
+import SignupScreen from './screens/SignupScreen';
 
 
 DefaultTheme.colors.background = '#FFFFFF'; // set background color globally
@@ -55,7 +56,8 @@ const rootReducer = combineReducers({
   chat: ChatReducer,
   user: UserReducer
 });
-const store = createStore(rootReducer, composeWithDevTools());
+// const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 // const store = createStore(rootReducer);
 
 export default function App() {
@@ -90,7 +92,7 @@ export default function App() {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Home" component={SignupScreen} />
         <Tab.Screen name="Discover" component={Discover} />
         <Tab.Screen name="Chat" component={StackNavigator} />
         <Tab.Screen name="Menu" component={MenuStackNavigator} />
