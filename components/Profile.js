@@ -11,6 +11,7 @@ const Profile = props => {
       <View>
           <Text>Profile</Text>
           <Text>{loggedInUser.name}</Text>
+          <Text>{loggedInUser.email}</Text>
           <Text>{loggedInUser.title}</Text>
           <Button title="Edit Profile" onPress={() => navigation.navigate("EditProfile")} />
       </View>

@@ -1,9 +1,8 @@
 class User {
-    constructor(id, name, password, email, image, title, chatNotification)
+    constructor(id, name, email, image, title, chatNotification)
     {
         this.id = id;
         this.name = name;
-        this.password = password;
         this.email = email;
         this.image = image;
         this.title = title;

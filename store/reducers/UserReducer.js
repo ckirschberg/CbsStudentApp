@@ -1,3 +1,4 @@
+import User from '../../models/User';
 import { SAVE_USER, SIGNUP } from '../UserActions';
 import { USERS } from './../../data/dummy-data';
 
@@ -11,13 +12,20 @@ const initialState = {
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
         case SIGNUP:
-            return { ...state, /* We would like to save a user object and also the token */ };
+        {
+            return { ...state, 
+                loggedInUser: new User(action.payload.localId, '', action.payload.email, '', '', false), 
+                idToken: action.payload.idToken 
+            };
+        }
 
         case SAVE_USER:
+        {
             return {
                 ...state,
                 loggedInUser: action.payload
             }
+        }
         // case TOGGLE_HAPPY:
         //     return {
         //         ...state, 
