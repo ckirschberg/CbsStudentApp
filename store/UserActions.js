@@ -29,7 +29,8 @@ export const signup = (email, password) => {
            //There was a problem..
        } else {
            
-           dispatch({type: SIGNUP, payload: email });
+           dispatch({type: SIGNUP, payload: data });
+           
            console.log(email);
        }
    };
