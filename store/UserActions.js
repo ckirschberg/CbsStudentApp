@@ -17,6 +17,8 @@ export const signup = (email, password) => {
            body: JSON.stringify({ //javascript to json
                //key value pairs of data you want to send to server
                // ...
+               email: email,
+               password: password,
                returnSecureToken: true
            })
        });
@@ -27,7 +29,8 @@ export const signup = (email, password) => {
            //There was a problem..
        } else {
            
-           dispatch({type: SIGNUP, payload: 'something to pass to reducer'})
+           dispatch({type: SIGNUP, payload: email });
+           console.log(email);
        }
    };
 };

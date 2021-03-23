@@ -1,13 +1,18 @@
-import { SAVE_USER } from '../UserActions';
+import { SAVE_USER, SIGNUP } from '../UserActions';
 import { USERS } from './../../data/dummy-data';
 
 const initialState = {
-    loggedInUser: USERS[0]
+    loggedInUser: null,
+    idToken: null,
+    // email: ''
     //...
 }
 
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
+        case SIGNUP:
+            return { ...state, /* We would like to save a user object and also the token */ };
+
         case SAVE_USER:
             return {
                 ...state,
