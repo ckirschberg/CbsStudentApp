@@ -1,3 +1,4 @@
+import { SAVE_USER } from '../UserActions';
 import { USERS } from './../../data/dummy-data';
 
 const initialState = {
@@ -7,7 +8,11 @@ const initialState = {
 
 const UserReducer = (state = initialState, action) => {
     switch (action.type) {
-        
+        case SAVE_USER:
+            return {
+                ...state,
+                loggedInUser: action.payload
+            }
         // case TOGGLE_HAPPY:
         //     return {
         //         ...state, 
