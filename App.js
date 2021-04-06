@@ -16,12 +16,14 @@ import ChatMessages from './screens/ChatMessages';
 import MenuScreen from './screens/MenuScreen';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { Provider } from 'react-redux';
+import { Provider, useSelector } from 'react-redux';
 import ChatReducer from './store/reducers/ChatReducer';
 import EditProfileScreen from './screens/EditProfileScreen';
 import UserReducer from './store/reducers/UserReducer';
 import ReduxThunk from 'redux-thunk';
 import SignupScreen from './screens/SignupScreen';
+import LoginScreen from './screens/LoginScreen';
+import NewChatroomScreen from './screens/NewChatroomScreen';
 
 
 DefaultTheme.colors.background = '#FFFFFF'; // set background color globally
@@ -60,45 +62,68 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 // const store = createStore(rootReducer);
 
+
+const UserAccess = () => {
+  const isSignedIn = useSelector(state => state.user.loggedInUser);
+
+  return (
+    <NavigationContainer>
+    {isSignedIn ? (
+    <Tab.Navigator
+    screenOptions={({ route }) => ({
+      tabBarIcon: ({ focused, color, size }) => {
+        let iconName;
+
+        if (route.name === 'Home') {
+          iconName = focused
+            ? 'ios-information-circle'
+            : 'ios-information-circle-outline';
+        } else if (route.name === 'Discover') {
+          iconName = focused ? 'ios-list-box' : 'ios-list';
+        } else if (route.name === 'Chat') {
+          iconName = focused ? 'ios-list-box' : 'ios-list';
+        } else if (route.name === 'Menu') {
+          iconName = focused ? 'ios-list-box' : 'ios-list';
+        }
+
+        // You can return any component that you like here!
+        return <Ionicons name={iconName} size={size} color={color} />;
+      },
+    })}
+    tabBarOptions={{
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray',
+    }}
+  >
+    <Tab.Screen name="Home" component={SignupScreen} />
+    <Tab.Screen name="New Chatroom" component={NewChatroomScreen} />
+    <Tab.Screen name="Chat" component={StackNavigator} />
+    <Tab.Screen name="Menu" component={MenuStackNavigator} />
+  </Tab.Navigator>
+  ) : (
+    <Stack.Navigator>
+        <Stack.Screen name="Signup" component={SignupScreen}/>
+        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+    </Stack.Navigator>
+  ) }  
+</NavigationContainer>
+);
+}
+
+
+
+
+
+
+
 export default function App() {
 
+  // redux store not accessible
 
   return (
     <Provider store={store}>
-      <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = focused
-                ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Discover') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
-            } else if (route.name === 'Chat') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
-            } else if (route.name === 'Menu') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
-            }
-
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: 'tomato',
-          inactiveTintColor: 'gray',
-        }}
-      >
-        <Tab.Screen name="Home" component={SignupScreen} />
-        <Tab.Screen name="Discover" component={Discover} />
-        <Tab.Screen name="Chat" component={StackNavigator} />
-        <Tab.Screen name="Menu" component={MenuStackNavigator} />
-      </Tab.Navigator>
-    </NavigationContainer>
-  </Provider>
+      <UserAccess />
+    </Provider>
   );
 }
 

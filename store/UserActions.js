@@ -1,3 +1,4 @@
+
 export const SAVE_USER = 'SAVE_USER';
 export const SIGNUP = 'SIGNUP';
 
@@ -8,6 +9,7 @@ export const saveUser = (user) => {
  
 export const signup = (email, password) => {
    return async dispatch => {
+       console.log("signup");
        const response = await fetch(
            'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAa3t4SgCzfkTNVXEcVpEFKCr96jwS2uS8', {
            method: 'POST',
@@ -30,7 +32,6 @@ export const signup = (email, password) => {
        } else {
            
            dispatch({type: SIGNUP, payload: data });
-           
            console.log(email);
        }
    };
