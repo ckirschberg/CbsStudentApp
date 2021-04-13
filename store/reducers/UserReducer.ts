@@ -24,19 +24,16 @@ const UserReducer = (state: UserState = initialState, action: Action) => {
         case SIGNUP:
         {
             return { ...state, 
-                loggedInUser: new User(action.payload.localId, '', action.payload.email, '', '', false), 
+                loggedInUser: new User(action.payload.localId, action.payload.email), 
                 idToken: action.payload.idToken 
             };
         }
 
         case SAVE_USER:
         {
-            return tassign(state, { loggedInUser: action.payload });
+            return tassign(state, { loggedInUser: action.payload, idToken: action.payload.idToken });
             
-            // return {
-            //     ...state,
-            //     loggedInUser: action.payload
-            // }
+            // return { ...state, user: action.payload }
         }
         // case TOGGLE_HAPPY:
         //     return {

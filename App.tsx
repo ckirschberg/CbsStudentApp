@@ -58,7 +58,6 @@ const rootReducer = combineReducers({
   chat: ChatReducer,
   user: UserReducer
 });
-export type RootState = ReturnType<typeof rootReducer>​
 
 // const store = createStore(rootReducer, composeWithDevTools());
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
