@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import Input from './../components/common/Input';
-import { saveUser } from './../store/UserActions';
+import Input from '../components/common/Input';
+import { saveUser } from '../store/UserActions';
 import { useNavigation } from '@react-navigation/native';
+import { RootState } from '../App';
 
-const EditProfileScreen = props => {
-    const profileInfo = useSelector(state => state.user.loggedInUser);
+const EditProfileScreen = () => {
+    // RootState instead of any
+    const profileInfo = useSelector( (state: any) => state.user.loggedInUser);
     const [changeName, setChangeName] = useState(profileInfo.name); // lift up
     const [nameValid, setNameValid] = useState(false); // lift up - pass through props instead
     const dispatch = useDispatch();
@@ -34,8 +36,8 @@ const EditProfileScreen = props => {
           <Input label="Username"
             error="Please fill out your name"
             text={changeName} nameValid={nameValid}
-            onValid={valid => setNameValid(valid)}
-            setContent={content => setChangeName(content)}/>
+            onValid={ (valid: any) => setNameValid(valid)}
+            setContent={ (content: any) => setChangeName(content)}/>
         
         {/* <Input label="Email" value={profileInfo.email} 
             error="Please fill out your email"/> */}

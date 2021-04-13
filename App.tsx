@@ -58,13 +58,15 @@ const rootReducer = combineReducers({
   chat: ChatReducer,
   user: UserReducer
 });
+export type RootState = ReturnType<typeof rootReducer>​
+
 // const store = createStore(rootReducer, composeWithDevTools());
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 // const store = createStore(rootReducer);
 
 
 const UserAccess = () => {
-  const isSignedIn = useSelector(state => state.user.loggedInUser);
+  const isSignedIn = useSelector((state : any) => state.user.loggedInUser);
 
   return (
     <NavigationContainer>

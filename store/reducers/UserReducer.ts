@@ -1,15 +1,25 @@
 import User from '../../models/User';
 import { SAVE_USER, SIGNUP } from '../UserActions';
-import { USERS } from './../../data/dummy-data';
+import { USERS } from '../../data/dummy-data';
+import { tassign } from 'tassign';
 
-const initialState = {
-    loggedInUser: null,
-    idToken: null,
+export interface UserState {
+    loggedInUser: User | undefined;
+    idToken: string | undefined;
+}
+export interface Action {
+    type: string;
+    payload: any | undefined;
+}
+
+const initialState: UserState = {
+    loggedInUser: undefined,
+    idToken: undefined,
     // email: ''
     //...
 }
 
-const UserReducer = (state = initialState, action) => {
+const UserReducer = (state: UserState = initialState, action: Action) => {
     switch (action.type) {
         case SIGNUP:
         {
@@ -21,10 +31,12 @@ const UserReducer = (state = initialState, action) => {
 
         case SAVE_USER:
         {
-            return {
-                ...state,
-                loggedInUser: action.payload
-            }
+            return tassign(state, { loggedInUser: action.payload });
+            
+            // return {
+            //     ...state,
+            //     loggedInUser: action.payload
+            // }
         }
         // case TOGGLE_HAPPY:
         //     return {
