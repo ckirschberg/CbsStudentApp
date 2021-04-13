@@ -1,3 +1,4 @@
+import { fetchChatrooms } from "./ChatActions";
 
 export const SAVE_USER = 'SAVE_USER';
 export const SIGNUP = 'SIGNUP';
@@ -32,7 +33,8 @@ export const signup = (email, password) => {
        } else {
            
            dispatch({type: SIGNUP, payload: data });
-           console.log(email);
+           dispatch(fetchChatrooms());
+           
        }
    };
 };
